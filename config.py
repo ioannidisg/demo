@@ -1,1 +1,1 @@
-learning rate = 0.01
+learning rate = 0.0001
