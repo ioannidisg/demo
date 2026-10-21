@@ -7,3 +7,4 @@ learning_rate = 0.001
 print("Training model:", model_name)
 print("Epochs:", epochs)
 print("Learning rate:", learning_rate)
+print("Model training started")
