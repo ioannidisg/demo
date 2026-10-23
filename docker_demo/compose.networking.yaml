@@ -1,0 +1,35 @@
+
+services:
+  ml-server:
+    image: python:3.11
+    command: python -m http.server 8000 --bind 0.0.0.0
+    ports:
+      - "127.0.0.1:9000:8000"
+    volumes:
+      - .:/app:ro
+    working_dir: /app
+
+  ml-client:
+    image: python:3.11
+    depends_on:
+      - ml-server
+    command:
+      - python
+      - -c
+      - |
+        import time
+        import urllib.request
+
+        for attempt in range(15):
+            try:
+                response = urllib.request.urlopen(
+                    "http://ml-server:8000",
+                    timeout=2
+                )
+                print("HTTP Status:", response.status, flush=True)
+                print("Client connected successfully!", flush=True)
+                break
+            except Exception:
+                time.sleep(1)
+        else:
+            raise RuntimeError("Could not connect to ml-server")

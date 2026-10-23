@@ -1,0 +1,8 @@
+
+services:
+  ml-app:
+    build: .
+    image: my-python-app:4.0
+    environment:
+      MODEL_VERSION: "v7"
+      APP_ENV: "testing"
