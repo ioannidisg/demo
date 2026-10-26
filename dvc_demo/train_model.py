@@ -18,7 +18,7 @@ y = df["failure"]
 
 # 3. Create model
 model = RandomForestClassifier(
-    n_estimators=10,
+    n_estimators=50,
     random_state=42
 )
 
