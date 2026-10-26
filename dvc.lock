@@ -20,3 +20,23 @@ stages:
       hash: md5
       md5: 2c8bd6f7c4ed56987f505b6ad609c6da
       size: 63481
+  evaluate:
+    cmd: python dvc_demo/evaluate.py
+    deps:
+    - path: dvc_demo/evaluate.py
+      hash: md5
+      md5: 611efb1048ac6b70ea93819d1cee691e
+      size: 1094
+    - path: dvc_demo/model.joblib
+      hash: md5
+      md5: 2c8bd6f7c4ed56987f505b6ad609c6da
+      size: 63481
+    - path: dvc_demo/train.csv
+      hash: md5
+      md5: 6e0a14bb96b5198fe29a1768c3533603
+      size: 113
+    outs:
+    - path: dvc_demo/metrics.json
+      hash: md5
+      md5: aed4c6216573de4906939205915c8bca
+      size: 90
