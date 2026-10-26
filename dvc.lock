@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python dvc_demo/train_model.py
+    deps:
+    - path: dvc_demo/train.csv
+      hash: md5
+      md5: 6e0a14bb96b5198fe29a1768c3533603
+      size: 113
+    - path: dvc_demo/train_model.py
+      hash: md5
+      md5: 92c86767aac6108fe94dc35cb5b36f1a
+      size: 1057
+    params:
+      params.yaml:
+        n_estimators: 100
+        random_state: 42
+    outs:
+    - path: dvc_demo/model.joblib
+      hash: md5
+      md5: 2c8bd6f7c4ed56987f505b6ad609c6da
+      size: 63481

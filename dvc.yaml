@@ -1,0 +1,11 @@
+stages:
+  train:
+    cmd: python dvc_demo/train_model.py
+    deps:
+    - dvc_demo/train.csv
+    - dvc_demo/train_model.py
+    params:
+    - n_estimators
+    - random_state
+    outs:
+    - dvc_demo/model.joblib
