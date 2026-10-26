@@ -13,13 +13,13 @@ stages:
       size: 1057
     params:
       params.yaml:
-        n_estimators: 100
+        n_estimators: 5
         random_state: 42
     outs:
     - path: dvc_demo/model.joblib
       hash: md5
-      md5: 2c8bd6f7c4ed56987f505b6ad609c6da
-      size: 63481
+      md5: 001ebb2a075ee7745bb79037a2ffac17
+      size: 4841
   evaluate:
     cmd: python dvc_demo/evaluate.py
     deps:
@@ -29,8 +29,8 @@ stages:
       size: 1094
     - path: dvc_demo/model.joblib
       hash: md5
-      md5: 2c8bd6f7c4ed56987f505b6ad609c6da
-      size: 63481
+      md5: 001ebb2a075ee7745bb79037a2ffac17
+      size: 4841
     - path: dvc_demo/train.csv
       hash: md5
       md5: 6e0a14bb96b5198fe29a1768c3533603
