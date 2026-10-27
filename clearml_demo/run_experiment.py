@@ -57,6 +57,22 @@ for metric_name, value in metrics.items():
 
 print("Evaluation metrics:", metrics)
 
+MODEL_PATH = PROJECT_DIR / "dvc_demo" / "model.joblib"
+
+task.upload_artifact(
+    name="trained_random_forest",
+    artifact_object=str(MODEL_PATH),
+    wait_on_upload=True
+)
+
+task.upload_artifact(
+    name="evaluation_metrics",
+    artifact_object=str(METRICS_PATH),
+    wait_on_upload=True
+)
+
+print("Model and metrics uploaded to ClearML!")
+
 # 8. Complete experiment
 task.close()
 
