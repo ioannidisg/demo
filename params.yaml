@@ -1,2 +1,4 @@
-n_estimators: 50
+n_estimators: 20
 random_state: 42
+test_size: 0.20
+split_random_state: 42

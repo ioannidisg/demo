@@ -19,7 +19,7 @@ with open(PARAMS_PATH, "r", encoding="utf-8") as f:
 # 3. Create ClearML experiment
 task = Task.init(
     project_name="KIOS ML Preparation",
-    task_name=f"Random Forest - {params['n_estimators']} trees",
+    task_name=f"Random Forest - {params['n_estimators']} trees -v2 -test split",
     reuse_last_task_id=False
 )
 
