@@ -5,38 +5,43 @@ stages:
     deps:
     - path: dvc_demo/train.csv
       hash: md5
-      md5: 6e0a14bb96b5198fe29a1768c3533603
-      size: 113
+      md5: fae84652dd1cd9bc6aa7de5e36cd58d3
+      size: 14968
     - path: dvc_demo/train_model.py
       hash: md5
-      md5: 92c86767aac6108fe94dc35cb5b36f1a
-      size: 1057
+      md5: dd1a1c281d7f2bc5fc05a493cbeb1686
+      size: 1386
     params:
       params.yaml:
-        n_estimators: 5
+        n_estimators: 20
         random_state: 42
+        split_random_state: 42
+        test_size: 0.2
     outs:
     - path: dvc_demo/model.joblib
       hash: md5
-      md5: 001ebb2a075ee7745bb79037a2ffac17
-      size: 4841
+      md5: d754084ab88692ec39b5e58e33007bf7
+      size: 515161
   evaluate:
     cmd: python dvc_demo/evaluate.py
     deps:
     - path: dvc_demo/evaluate.py
       hash: md5
-      md5: 611efb1048ac6b70ea93819d1cee691e
-      size: 1094
+      md5: 351b8dda670411cb0892e7b2d2dc99a1
+      size: 1639
     - path: dvc_demo/model.joblib
       hash: md5
-      md5: 001ebb2a075ee7745bb79037a2ffac17
-      size: 4841
+      md5: d754084ab88692ec39b5e58e33007bf7
+      size: 515161
     - path: dvc_demo/train.csv
       hash: md5
-      md5: 6e0a14bb96b5198fe29a1768c3533603
-      size: 113
+      md5: fae84652dd1cd9bc6aa7de5e36cd58d3
+      size: 14968
+    params:
+      params.yaml:
+        random_state: 42
     outs:
     - path: dvc_demo/metrics.json
       hash: md5
-      md5: aed4c6216573de4906939205915c8bca
-      size: 90
+      md5: 9844d6c84d3318a79009082f95f70234
+      size: 137

@@ -7,6 +7,8 @@ stages:
     params:
     - n_estimators
     - random_state
+    - test_size
+    - split_random_state
     outs:
     - dvc_demo/model.joblib
   evaluate:
@@ -15,6 +17,9 @@ stages:
     - dvc_demo/evaluate.py
     - dvc_demo/model.joblib
     - dvc_demo/train.csv
+    params:
+    - random_state
     metrics:
     - dvc_demo/metrics.json:
         cache: false
+
