@@ -11,6 +11,8 @@ task = Task.init(
     reuse_last_task_id=False
 )
 
+Task.add_requirements("dvc")
+
 task.execute_remotely(
     queue_name="default",
     clone=False,
