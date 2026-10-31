@@ -32,6 +32,7 @@ async def lifespan(app: FastAPI):
 # 3. Create FastAPI application
 app = FastAPI(
     title="KIOS ML Model Serving API",
+    version="1.1.0",
     lifespan=lifespan
 )
 
@@ -40,6 +41,12 @@ app = FastAPI(
 class SensorInput(BaseModel):
     temperature: float
     vibration: float = Field(ge=0)
+
+@app.get("/version")
+def get_version():
+    return {
+        "api_version": app.version
+    }
 
 
 # 5. Health endpoint
