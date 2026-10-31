@@ -18,10 +18,10 @@ jobs:
 
     steps:
       - name: Check runner and Docker
-        shell: powershell
+        shell: cmd
         run: |
-          Write-Host "Runner: $env:RUNNER_NAME"
-          Write-Host "Operating System: $env:RUNNER_OS"
+          echo Runner: %RUNNER_NAME%
+          echo Operating System: %RUNNER_OS%
 
           docker version
           docker compose version
