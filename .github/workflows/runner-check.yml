@@ -1,0 +1,28 @@
+
+name: Self-hosted Runner Check
+
+on:
+  push:
+    branches:
+      - feature/fastapi-model-serving
+    paths:
+      - '.github/workflows/runner-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check-runner:
+    runs-on: [self-hosted, windows, x64, kios-deploy]
+    timeout-minutes: 5
+
+    steps:
+      - name: Check runner and Docker
+        shell: powershell
+        run: |
+          Write-Host "Runner: $env:RUNNER_NAME"
+          Write-Host "Operating System: $env:RUNNER_OS"
+
+          docker version
+          docker compose version
+          docker ps
