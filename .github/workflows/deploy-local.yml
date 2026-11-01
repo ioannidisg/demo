@@ -1,0 +1,64 @@
+
+name: Local CD Test
+
+on:
+  push:
+    branches:
+      - feature/fastapi-model-serving
+    paths:
+      - '.github/workflows/deploy-local.yml'
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: kios-local-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy-local:
+    runs-on: [self-hosted, windows, x64, kios-deploy]
+    timeout-minutes: 10
+
+    env:
+      IMAGE_TAG: 23c92bc14d247d092d5d62567856375d0f39d554
+
+    steps:
+      # 1. Retrieve Docker Compose configuration
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # 2. Authenticate to private GHCR
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3. Download the selected image
+      - name: Pull Docker image
+        shell: cmd
+        run: |
+          docker compose -f compose.deploy.yaml pull
+          if errorlevel 1 exit /b 1
+
+      # 4. Update the running container
+      - name: Deploy with Docker Compose
+        shell: cmd
+        run: |
+          docker compose -f compose.deploy.yaml up -d
+          if errorlevel 1 exit /b 1
+          docker compose -f compose.deploy.yaml ps
+
+
+      # 5. Wait until FastAPI is ready
+      - name: Verify deployment
+        shell: cmd
+        run: |
+          curl.exe --fail --retry 12 --retry-delay 2 --retry-all-errors --max-time 5 http://127.0.0.1:8001/health
+          if errorlevel 1 exit /b 1
+
+          curl.exe --fail http://127.0.0.1:8001/version
+          if errorlevel 1 exit /b 1

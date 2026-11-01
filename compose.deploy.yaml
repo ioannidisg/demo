@@ -1,0 +1,7 @@
+
+services:
+  inference-api:
+    image: ghcr.io/ioannidisg/kios-fastapi:${IMAGE_TAG:?IMAGE_TAG must be set}
+    ports:
+      - "127.0.0.1:8001:8000"
+    restart: unless-stopped

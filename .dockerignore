@@ -1,0 +1,26 @@
+
+# Git and development environment
+.git/
+.venv/
+.idea/
+
+# Python temporary files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets
+.env
+.env.*
+
+# Unnecessary project directories
+clearml_demo/
+docker_demo/
+tests/
+.github/
+
+# DVC metadata and cache
+.dvc/
+
+# Training dataset (not required for inference)
+dvc_demo/train.csv

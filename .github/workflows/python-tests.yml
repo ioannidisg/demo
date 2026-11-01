@@ -1,8 +1,9 @@
+
 name: Python CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, 'feature/**']
   pull_request:
     branches: [master]
 
@@ -20,10 +21,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
-      - name: Install pytest
-        run: python -m pip install pytest
+      - name: Install dependencies
+        run: python -m pip install -r fastapi_demo/requirements-test.txt
 
       - name: Run tests
         run: python -m pytest -q
